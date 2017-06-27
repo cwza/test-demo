@@ -6,34 +6,52 @@ jobs:
       - image: circleci/golang:1.8
     steps:
       - checkout
-  test-unit:
-    steps:
-      - run: make test-unit
-  test-all:
-    steps:
       - run: make test
-  deploy:
-    steps:
       - deploy:
           name: deploy
           command: |
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+              make build
               chmod +x ./circleci/deploy-heroku.sh
               ./circleci/deploy-heroku.sh
             fi
-workflows:
-  version: 2
-  build_test_deploy:
-    jobs:
-      - build
-      - test-unit:
-          requires:
-            - build
-      - test-all:
-          requires:
-            - build
-      - deploy-heroku:
-          requires:
-            - build
-            - test-unit
-            - test-all
+# version: 2
+# jobs:
+#   build:
+#     working_directory: ~go/src/github.com/cwza/test-demo
+#     docker:
+#       - image: circleci/golang:1.8
+#     steps:
+#       - checkout
+#   test-unit:
+#     steps:
+#       - run: make test-unit
+#   test-all:
+#     steps:
+#       - run: make test
+#   deploy:
+#     steps:
+#       - deploy:
+#           name: deploy
+#           command: |
+#             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
+#               make build
+#               chmod +x ./circleci/deploy-heroku.sh
+#               ./circleci/deploy-heroku.sh
+#             fi
+# workflows:
+#   version: 2
+#   build_test_deploy:
+#     jobs:
+#       - build
+#       - test-unit:
+#           requires:
+#             - build
+#       - test-all:
+#           requires:
+#             - build
+#       - deploy-heroku:
+#           requires:
+#             - build
+#             - test-unit
+#             - test-all
