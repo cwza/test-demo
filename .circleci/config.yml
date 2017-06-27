@@ -1,0 +1,37 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~go/src/github.com/cwza/test-demo
+    docker:
+      - image: golang:1.8
+    steps:
+      - checkout
+  test-unit:
+    steps:
+      - run: make test-unit
+  test-all:
+    steps:
+      - run: make test
+  deploy-heroku:
+    steps:
+      - run: |
+        if [ "${CIRCLE_BRANCH}" == "master" ]; then
+          chmod +x ./circleci/deploy-heroku.sh
+          ./circleci/deploy-heroku.sh
+        fi
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test-unit:
+          requires:
+            - build
+      - test-all:
+          requires:
+            - build
+      - deploy-heroku:
+          requires:
+            - build
+            - test-unit
+            - test-all
