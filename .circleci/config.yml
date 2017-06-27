@@ -1,11 +1,11 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/go/src/github.com/cwza/test-demo
+    working_directory: /go/src/github.com/cwza/test-demo
     docker:
       - image: golang:1.8
         environment:
-          GOPATH: $HOME/go
+          GOPATH: /go
     steps:
       - checkout
       - run: make test
