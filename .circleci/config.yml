@@ -9,6 +9,7 @@ jobs:
     steps:
       - checkout
       - run: make test
+      - setup_remote_docker
       - deploy:
           name: deploy
           command: |
