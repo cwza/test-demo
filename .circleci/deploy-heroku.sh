@@ -12,6 +12,7 @@ tar -xz -C /tmp -f /tmp/heroku.tar.gz
 mkdir -p /usr/local/lib /usr/local/bin
 mv /tmp/heroku-cli-v* /usr/local/lib/heroku
 ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
+heroku plugins:install heroku-container-registry
 
 # push to heroku
 heroku container:login
