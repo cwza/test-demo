@@ -8,7 +8,7 @@ mv /tmp/docker/* /usr/bin
 
 # Install heroku cli
 curl -L -o /tmp/heroku.tar.gz https://cli-assets.heroku.com/heroku-cli/channels/stable/heroku-cli-linux-x64.tar.gz
-tar -xz -C /tmp -f heroku.tar.gz
+tar -xz -C /tmp -f /tmp/heroku.tar.gz
 mkdir -p /usr/local/lib /usr/local/bin
 mv /tmp/heroku-cli-v* /usr/local/lib/heroku
 ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
