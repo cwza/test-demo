@@ -4,6 +4,8 @@ jobs:
     working_directory: ~/go/src/github.com/cwza/test-demo
     docker:
       - image: golang:1.8
+        environment:
+          GOPATH: $HOME/go
     steps:
       - checkout
       - run: make test
