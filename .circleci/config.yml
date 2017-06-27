@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~go/src/github.com/cwza/test-demo
+    working_directory: ~/go/src/github.com/cwza/test-demo
     docker:
       - image: circleci/golang:1.8
     steps:
@@ -18,7 +18,7 @@ jobs:
 # version: 2
 # jobs:
 #   build:
-#     working_directory: ~go/src/github.com/cwza/test-demo
+#     working_directory: ~/go/src/github.com/cwza/test-demo
 #     docker:
 #       - image: circleci/golang:1.8
 #     steps:
