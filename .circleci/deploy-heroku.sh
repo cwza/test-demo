@@ -1,3 +1,4 @@
+env
 
 # Install docker client
 set -x
