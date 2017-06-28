@@ -16,7 +16,7 @@ func init() {
 	Router.Get("/health", health)
 	Router.Get("/seq/getValue", seqGetValue)
 	Router.Get("/seq/reset", seqReset)
-	Router.Get("/seq/getValueByStep/{step}", seqGetValueByStep)
+	Router.Get("/seq/getValueByStep/{step:^[1-9]\\d*$}", seqGetValueByStep)
 }
 
 func health(w http.ResponseWriter, req *http.Request) {
@@ -35,11 +35,7 @@ func seqReset(w http.ResponseWriter, req *http.Request) {
 }
 
 func seqGetValueByStep(w http.ResponseWriter, req *http.Request) {
-	step, err := strconv.Atoi(chi.URLParam(req, "step"))
-	if err != nil {
-		fmt.Fprint(w, "step should be an integer")
-		return
-	}
+	step, _ := strconv.Atoi(chi.URLParam(req, "step"))
 	seqService := service.NewSeqService(nil)
 	value := seqService.GetValueByStep(step)
 	fmt.Fprintf(w, strconv.Itoa(value))

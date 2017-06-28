@@ -80,13 +80,21 @@ func TestRouter_seqGetValueByStepError(t *testing.T) {
 	}
 	seq := remote.NewSequenceImpl()
 	defer seq.Reset()
-	req := httptest.NewRequest("GET", "/seq/getValueByStep/xxx", nil)
-	w := httptest.NewRecorder()
-	Router.ServeHTTP(w, req)
-	res := w.Result()
-	assert.Equal(t, http.StatusOK, res.StatusCode, "http status should be 200")
-	body, err := ioutil.ReadAll(res.Body)
-	defer res.Body.Close()
-	require.NoError(t, err, "should not have error while get body")
-	assert.Equal(t, "step should be an integer", string(body), "should return error while step is xxx")
+
+	tcs := map[string]struct {
+		A        string
+		Expected int
+	}{
+		"minus":   {"-4", http.StatusNotFound},
+		"not int": {"xxx", http.StatusNotFound},
+		"zero":    {"0", http.StatusNotFound},
+	}
+
+	for msg, tc := range tcs {
+		req := httptest.NewRequest("GET", "/seq/getValueByStep/"+tc.A, nil)
+		w := httptest.NewRecorder()
+		Router.ServeHTTP(w, req)
+		actual := w.Result().StatusCode
+		assert.Equal(t, tc.Expected, actual, msg)
+	}
 }
