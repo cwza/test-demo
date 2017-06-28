@@ -9,15 +9,16 @@ jobs:
           HEROKU_PROJ: immense-fortress-68091
     steps:
       - checkout
+      - run: env 
       - run: make test
       - setup_remote_docker
-      - deploy:
+      - run:
           name: deploy
           command: |
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
-              chmod +x ./.circleci/deploy-heroku.sh
-              ./.circleci/deploy-heroku.sh
-            fi
+            env
+            echo $HEROKU_API_KEY
+            chmod +x ./.circleci/deploy-heroku.sh
+            ./.circleci/deploy-heroku.sh
 # version: 2
 # jobs:
 #   build:
