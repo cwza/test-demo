@@ -11,7 +11,8 @@ func TestSeq_GetValue(t *testing.T) {
 		t.Skip("skipping integration test")
 	}
 	seq := NewSequenceImpl()
-	assert.IsType(t, 0, seq.GetValue())
+	seq.Reset()
+	assert.Equal(t, 0, seq.GetValue())
 }
 
 func TestSeq_GetNext(t *testing.T) {
@@ -40,7 +41,8 @@ func TestSeq_Reset(t *testing.T) {
 
 func TestSeqMock_GetValue(t *testing.T) {
 	seq := NewSequenceMock()
-	assert.IsType(t, 0, seq.GetValue())
+	seq.Reset()
+	assert.Equal(t, 0, seq.GetValue())
 }
 
 func TestSeqMock_GetNext(t *testing.T) {

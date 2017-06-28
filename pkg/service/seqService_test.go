@@ -15,28 +15,32 @@ func TestSeqService_NewSeqService(t *testing.T) {
 }
 
 func TestSeqService_GetValue(t *testing.T) {
-	seqService := NewSeqService(remote.NewSequenceMock())
-	assert.IsType(t, 0, seqService.GetValue())
+	seq := remote.NewSequenceMock()
+	seq.Reset()
+	seqService := NewSeqService(seq)
+	assert.Equal(t, 0, seqService.GetValue())
 }
 
 func TestSeqService_GetNextByStep(t *testing.T) {
-	seqService := NewSeqService(remote.NewSequenceMock())
-	defer seqService.Reset()
-	seqService.Reset()
+	seq := remote.NewSequenceMock()
+	defer seq.Reset()
+	seq.Reset()
+	seqService := NewSeqService(seq)
 	seqService.GetValueByStep(1)
-	assert.Equal(t, 1, seqService.GetValue())
+	assert.Equal(t, 1, seq.GetValue())
 	seqService.GetValueByStep(2)
-	assert.Equal(t, 3, seqService.GetValue())
+	assert.Equal(t, 3, seq.GetValue())
 	seqService.GetValueByStep(2)
-	assert.Equal(t, 5, seqService.GetValue())
+	assert.Equal(t, 5, seq.GetValue())
 }
 
 func TestSeqService_Reset(t *testing.T) {
-	seqService := NewSeqService(remote.NewSequenceMock())
-	defer seqService.Reset()
+	seq := remote.NewSequenceMock()
+	defer seq.Reset()
+	seqService := NewSeqService(seq)
 	seqService.GetValueByStep(1)
 	seqService.GetValueByStep(2)
 	seqService.GetValueByStep(3)
 	seqService.Reset()
-	assert.Equal(t, 0, seqService.GetValue())
+	assert.Equal(t, 0, seq.GetValue())
 }

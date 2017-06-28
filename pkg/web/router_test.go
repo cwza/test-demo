@@ -45,13 +45,13 @@ func TestRouter_seqReset(t *testing.T) {
 	if testing.Short() {
 		t.Skip("skipping integration test")
 	}
+	seq := remote.NewSequenceImpl()
+	defer seq.Reset()
 	req := httptest.NewRequest("GET", "/seq/reset", nil)
 	w := httptest.NewRecorder()
 	Router.ServeHTTP(w, req)
 	res := w.Result()
 	assert.Equal(t, http.StatusOK, res.StatusCode, "http status should be 200")
-
-	seq := remote.NewSequenceImpl()
 	assert.Equal(t, 0, seq.GetValue())
 }
 
