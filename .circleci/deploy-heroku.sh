@@ -14,6 +14,9 @@ mv /tmp/heroku-cli-v* /usr/local/lib/heroku
 ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 heroku plugins:install heroku-container-registry
 
+# build app
+make -C ../ build
+
 # push to heroku
 heroku container:login
 heroku container:push web --app immense-fortress-68091
