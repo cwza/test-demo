@@ -12,7 +12,7 @@ jobs:
       - run: env 
       - run: make test
       - setup_remote_docker
-      - deploy:
+      - run:
           name: deploy
           command: |
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
