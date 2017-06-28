@@ -15,8 +15,8 @@ ln -s /usr/local/lib/heroku/bin/heroku /usr/local/bin/heroku
 heroku plugins:install heroku-container-registry
 
 # build app
-make -C ../ build
+make build
 
 # push to heroku
 heroku container:login
-heroku container:push web --app immense-fortress-68091
+heroku container:push web --app $HEROKU_PROJ
