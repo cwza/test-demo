@@ -9,7 +9,7 @@ jobs:
           HEROKU_PROJ: immense-fortress-68091
     steps:
       - checkout
-      - run: echo $HEROKU_API_KEY 
+      - run: env 
       - run: make test
       - setup_remote_docker
       - deploy:
