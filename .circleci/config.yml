@@ -15,6 +15,8 @@ jobs:
       - run:
           name: deploy
           command: |
+            env
+            echo $HEROKU_API_KEY
             if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
               chmod +x ./.circleci/deploy-heroku.sh
               ./.circleci/deploy-heroku.sh
