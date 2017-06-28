@@ -1,5 +1,3 @@
-env
-
 # Install docker client
 set -x
 VER="17.03.0-ce"
