@@ -15,7 +15,7 @@ func NewSeqService(seq remote.Sequence) SeqService {
 	return SeqService{seq}
 }
 
-func (seqService *SeqService) GetValueByStep(step int) int {
+func (seqService *SeqService) GetNextByStep(step int) int {
 	value := 0
 	for i := 0; i < step; i++ {
 		value = seqService.seq.GetNext()
