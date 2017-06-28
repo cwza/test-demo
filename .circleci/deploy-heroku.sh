@@ -22,4 +22,5 @@ make build
 
 # push to heroku
 heroku container:login
+echo $HEROKU_API_KEY 
 heroku container:push web --app $HEROKU_PROJ
