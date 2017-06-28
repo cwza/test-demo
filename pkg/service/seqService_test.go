@@ -14,6 +14,11 @@ func TestSeqService_NewSeqService(t *testing.T) {
 	assert.IsType(t, &remote.SequenceMock{}, seqService.seq)
 }
 
+func TestSeqService_GetValue(t *testing.T) {
+	seqService := NewSeqService(remote.NewSequenceMock())
+	assert.IsType(t, 0, seqService.GetValue())
+}
+
 func TestSeqService_GetNextByStep(t *testing.T) {
 	seqService := NewSeqService(remote.NewSequenceMock())
 	defer seqService.Reset()

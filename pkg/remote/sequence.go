@@ -20,7 +20,7 @@ type SequenceImpl struct {
 }
 
 func NewSequenceImpl() *SequenceImpl {
-	return &SequenceImpl{1000 * time.Microsecond, &sync.Mutex{}}
+	return &SequenceImpl{100 * time.Millisecond, &sync.Mutex{}}
 }
 
 func (seq *SequenceImpl) GetValue() int {
