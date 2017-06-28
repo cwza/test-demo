@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/cwza/test-demo/pkg/web"
+	"github.com/rs/cors"
 )
 
 func main() {
@@ -15,5 +16,5 @@ func main() {
 	if !ok {
 		port = ":10020"
 	}
-	log.Fatal(http.ListenAndServe(port, web.Router))
+	log.Fatal(http.ListenAndServe(port, cors.Default().Handler(web.Router)))
 }
