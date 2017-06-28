@@ -17,10 +17,8 @@ jobs:
           command: |
             env
             echo $HEROKU_API_KEY
-            if [[ "${CIRCLE_BRANCH}" == "master" ]]; then
-              chmod +x ./.circleci/deploy-heroku.sh
-              ./.circleci/deploy-heroku.sh
-            fi
+            chmod +x ./.circleci/deploy-heroku.sh
+            ./.circleci/deploy-heroku.sh
 # version: 2
 # jobs:
 #   build:
